@@ -5,6 +5,7 @@ Library/
 *.sln
 *.userprefs
 *.csproj
+temp/
 
 #################
 ## Eclipse
