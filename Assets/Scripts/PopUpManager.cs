@@ -6,7 +6,7 @@ public class PopUpManager : MonoBehaviour {
 
 	public static PopUpManager instance;
 	public List<PopUpObject> listOfPopUps;
-
+	public PopUpObject currentPopup;
 	public bool isShowing = false;
 
 	void Awake()
@@ -26,6 +26,7 @@ public class PopUpManager : MonoBehaviour {
 		if (listOfPopUps.Count > 0 && !isShowing)
 		{
 			listOfPopUps[0].ShowPopUp();
+			currentPopup = listOfPopUps[0];
 			listOfPopUps.RemoveAt(0);
 			isShowing = true;
 		}
@@ -34,5 +35,10 @@ public class PopUpManager : MonoBehaviour {
 	void AddPopup(PopUpObject puo)
 	{
 		listOfPopUps.Add(puo);
+	}
+
+	public void CloseCurrentPopup()
+	{
+		currentPopup.gameObject.SetActive(false);
 	}
 }

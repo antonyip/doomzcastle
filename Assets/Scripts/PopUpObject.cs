@@ -16,6 +16,7 @@ public class PopUpObject : MonoBehaviour {
 	void OnDisable()
 	{
 		PopUpManager.instance.isShowing = false;
+		PopUpManager.instance.currentPopup = null;
 		MaskManager.instance.HideMask();
 	}
 
