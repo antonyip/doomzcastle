@@ -7,6 +7,8 @@ public class GameLevelSwitcher : MonoBehaviour {
 	public GameObject MyGame;
 	public GameObject MyEditor;
 
+
+
 	void Awake()
 	{
 		instance = this;

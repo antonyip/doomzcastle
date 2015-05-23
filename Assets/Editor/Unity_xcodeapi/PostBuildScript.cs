@@ -26,7 +26,7 @@ public class PostBuildScript {
 	[PostProcessBuild]
 	public static void OnPostprocessBuild(BuildTarget buildTarget, string path) {
 		
-		if (buildTarget == BuildTarget.iPhone) {
+		if (buildTarget == BuildTarget.iOS) {
 			string projPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
 			
 			PBXProject proj = new PBXProject();

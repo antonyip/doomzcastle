@@ -9,6 +9,9 @@ public class DataManager : MonoBehaviour {
 	public LevelData selectedLevel;
 
 	public List<LevelData> listOfLevels;
+	public List<Sprite> listOfFloorTiles;
+	public List<Sprite> listOfBackgrounds;
+	public List<Sprite> listOfPlayers;
 	
 	void Awake()
 	{
@@ -20,7 +23,6 @@ public class DataManager : MonoBehaviour {
 	void Start ()
 	{
 		selectedLevel.LoadLevel(1);
-		//Debug.Log(Google2u.Levels.Instance.GetGenRow(Levels.rowIds.level4));
 	}
 	
 	// Update is called once per frame

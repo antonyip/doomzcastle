@@ -40,8 +40,8 @@ public class LevelEditorItemPrefab : MonoBehaviour, IDragHandler,IBeginDragHandl
 	{
 		if (!disableDrag)
 		{
-			//objectBeingDragged = n
-			//objectBeingDragged.transform.position = startPosition;
+			objectBeingDragged = null;
+			objectBeingDragged.transform.position = startPosition;
 		}
 	}
 

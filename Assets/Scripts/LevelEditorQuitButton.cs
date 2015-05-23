@@ -15,6 +15,6 @@ public class LevelEditorQuitButton : MonoBehaviour {
 
 	public void OnButtonPress()
 	{
-		SceneManager.instance.NextSceneName = "LevelSelect";
+		SceneManager.instance.NextSceneName = "MainMenu";
 	}
 }

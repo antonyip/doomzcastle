@@ -140,7 +140,7 @@ public class PlayerIOManager : MonoBehaviour {
 	void OnSearchLevel(DatabaseObject _databaseObject)
 	{
 		string leveldata = _databaseObject.GetString("leveldata");
-		Debug.Log(_databaseObject);
+		Debug.Log(leveldata);
 	}
 
 	public void SubmitCurrentLevel()

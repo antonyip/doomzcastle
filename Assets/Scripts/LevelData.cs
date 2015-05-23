@@ -9,12 +9,19 @@ public class LevelData
 	public int level;
 	public string levelData;
 
+	// customization
+	public int customizedTile;
+	public int customizedBackground;
+
+
 	// Use this for initialization
 	public LevelData ()
 	{
 		levelName = "undefined";
 		level = -1;
 		levelData = "0000000020004000000000060000000010000000000000003";
+		customizedTile = 0;
+		customizedBackground = 0;
 	}
 
 	// used for internal levels

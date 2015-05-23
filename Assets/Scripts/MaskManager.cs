@@ -28,11 +28,14 @@ public class MaskManager : MonoBehaviour {
 
 	public void HideMask()
 	{
+
+
 		--maskCounter;
 		if (maskCounter <= 0)
 		{
 			maskCounter = 0;
 			transform.GetChild(0).gameObject.SetActive(false);
 		}
+
 	}
 }

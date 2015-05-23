@@ -38,6 +38,11 @@ public class MainMenuButton : MonoBehaviour
 		PlayerIOManager.instance.Register(username,password,email,OnSimpleSuccess,OnSimpleFailure);
 	}
 
+	public void CancelLogin()
+	{
+		PlayerIOManager.instance.Logout();
+	}
+
 	public void LoginAccount()
 	{
 
@@ -51,6 +56,12 @@ public class MainMenuButton : MonoBehaviour
 	public void LoginKongregate()
 	{
 
+	}
+
+	public void GoToLevelEditor()
+	{
+		SceneManager.CurrentGameMode = SceneManager.GameMode.EditorMode;
+		SceneManager.instance.NextSceneName = "GameLevel";
 	}
 
 	public void Continue()

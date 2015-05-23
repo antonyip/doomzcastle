@@ -5,17 +5,31 @@ public class MainMenuScript : MonoBehaviour {
 
 	public GameObject MainMenu;
 	public GameObject LoginMenu;
+	public GameObject ReloginPopup;
+	public GameObject LoginPopup;
+
+	public static bool doOnce = true;
 
 	// Use this for initialization
 	void Start ()
 	{
-		InvokeRepeating("CheckLoggedIn",0.0f,5.0f);
+		if (doOnce)
+		{
+			if (PlayerPrefs.GetString(PlayerPrefStrings.UserUsername,"") != "")
+			{
+				ReloginPopup.SetActive(true);
+			}
+			doOnce = false;
+		}
+		InvokeRepeating("CheckLoggedIn",0.5f,1.0f);
 	}
 
 	void CheckLoggedIn()
 	{
 		if (PlayerIOManager.instance.LoggedIn)
 		{
+			ReloginPopup.SetActive(false);
+			LoginPopup.SetActive(false);
 			MainMenu.SetActive(true);
 			LoginMenu.SetActive(false);
 		}
@@ -32,3 +46,4 @@ public class MainMenuScript : MonoBehaviour {
 	
 	}
 }
+

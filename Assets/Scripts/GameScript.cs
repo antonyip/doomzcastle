@@ -17,6 +17,7 @@ public class GameScript : MonoBehaviour {
 	public GameObject StartPopUp;
 	public GameObject VictoryPopUp;
 	public GameObject DefeatPopUp;
+	public Image Background;
 
 	// Floor Details
 	public List<GameObject> allFloors = new List<GameObject>();
@@ -27,7 +28,7 @@ public class GameScript : MonoBehaviour {
 
 	public static int maxRow = 7;
 	public static int maxCol = 7;
-	public static int gridSpace = 5;
+	public static int gridSpace = 20;
 
 	public static int offsetGrid;
 	public static Vector3 startPoint = new Vector3();
@@ -131,15 +132,18 @@ public class GameScript : MonoBehaviour {
 			//Debug.Log(id);
 		}
 		*/
+		Background.sprite = DataManager.instance.listOfBackgrounds[DataManager.instance.selectedLevel.customizedBackground];
 
 		offsetGrid = (int)FloorPrefab.GetComponent<RectTransform>().rect.width;
 		startPoint = new Vector3(-(offsetGrid + gridSpace) * (int)(maxRow/2), -(offsetGrid + gridSpace)*(int)(maxCol/2),0);
+		Sprite floorSprite = DataManager.instance.listOfFloorTiles[DataManager.instance.selectedLevel.customizedTile];
 
 		for (int row = 0; row < maxRow; row++)
 		{
 			for (int col = 0; col < maxCol; col++)
 			{
 				GameObject go = Instantiate(FloorPrefab) as GameObject;
+				go.GetComponent<Image>().overrideSprite = floorSprite;
 				go.transform.SetParent(FloorHolder.transform);
 				go.transform.localScale = Vector3.one;
 				go.transform.localPosition = startPoint + new Vector3(col*(offsetGrid+gridSpace),row*(offsetGrid+gridSpace),0);
