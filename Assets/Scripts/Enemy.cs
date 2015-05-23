@@ -10,6 +10,7 @@ public enum EnemyType // MUST MATCH LIST IN ENEMY MANAGER AND UPDATE CHAR TO ENE
 	Wall,
 	PlayerStart,
 	Static,
+	Circular,
 };
 
 public enum CollisionType
@@ -58,6 +59,8 @@ public class Enemy : MonoBehaviour
 				return EnemyType.PlayerStart;
 			case '6':
 				return EnemyType.Static;
+			case '7':
+				return EnemyType.Circular;
 			default:
 				return EnemyType.Static;
 		}

@@ -6,7 +6,11 @@ public class GameLevelSwitcher : MonoBehaviour {
 	public static GameLevelSwitcher instance;
 	public GameObject MyGame;
 	public GameObject MyEditor;
-
+#if UNITY_EDITOR
+	public bool GameEditorMode;
+#else
+	bool GameEditorMode = false;
+#endif
 
 
 	void Awake()
@@ -17,7 +21,11 @@ public class GameLevelSwitcher : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-		//SceneManager.CurrentGameMode = SceneManager.GameMode.EditorMode;
+		if (GameEditorMode)
+		{
+			SceneManager.CurrentGameMode = SceneManager.GameMode.EditorMode;
+		}
+
 		if (SceneManager.CurrentGameMode == SceneManager.GameMode.GameMode)
 		{
 			MyGame.SetActive(true);
