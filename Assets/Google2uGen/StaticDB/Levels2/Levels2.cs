@@ -13,18 +13,19 @@ namespace Google2u
 	[System.Serializable]
 	public class Levels2Row : IGoogle2uRow
 	{
-		public int _idInt;
+		public int _idint;
 		public string _name;
 		public string _leveldata;
 		public int _validate;
-		public Levels2Row(string __id, string __idInt, string __name, string __leveldata, string __validate) 
+		public string _tuttext;
+		public Levels2Row(string __id, string __idint, string __name, string __leveldata, string __validate, string __tuttext) 
 		{
 			{
 			int res;
-				if(int.TryParse(__idInt, out res))
-					_idInt = res;
+				if(int.TryParse(__idint, out res))
+					_idint = res;
 				else
-					Debug.LogError("Failed To Convert _idInt string: "+ __idInt +" to int");
+					Debug.LogError("Failed To Convert _idint string: "+ __idint +" to int");
 			}
 			_name = __name.Trim();
 			_leveldata = __leveldata.Trim();
@@ -35,9 +36,10 @@ namespace Google2u
 				else
 					Debug.LogError("Failed To Convert _validate string: "+ __validate +" to int");
 			}
+			_tuttext = __tuttext.Trim();
 		}
 
-		public int Length { get { return 4; } }
+		public int Length { get { return 5; } }
 
 		public string this[int i]
 		{
@@ -53,7 +55,7 @@ namespace Google2u
 			switch( index )
 			{
 				case 0:
-					ret = _idInt.ToString();
+					ret = _idint.ToString();
 					break;
 				case 1:
 					ret = _name.ToString();
@@ -63,6 +65,9 @@ namespace Google2u
 					break;
 				case 3:
 					ret = _validate.ToString();
+					break;
+				case 4:
+					ret = _tuttext.ToString();
 					break;
 			}
 
@@ -74,8 +79,8 @@ namespace Google2u
 			var ret = System.String.Empty;
 			switch( colID.ToLower() )
 			{
-				case "idInt":
-					ret = _idInt.ToString();
+				case "idint":
+					ret = _idint.ToString();
 					break;
 				case "name":
 					ret = _name.ToString();
@@ -86,6 +91,9 @@ namespace Google2u
 				case "validate":
 					ret = _validate.ToString();
 					break;
+				case "tuttext":
+					ret = _tuttext.ToString();
+					break;
 			}
 
 			return ret;
@@ -93,20 +101,21 @@ namespace Google2u
 		public override string ToString()
 		{
 			string ret = System.String.Empty;
-			ret += "{" + "idInt" + " : " + _idInt.ToString() + "} ";
+			ret += "{" + "idint" + " : " + _idint.ToString() + "} ";
 			ret += "{" + "name" + " : " + _name.ToString() + "} ";
 			ret += "{" + "leveldata" + " : " + _leveldata.ToString() + "} ";
 			ret += "{" + "validate" + " : " + _validate.ToString() + "} ";
+			ret += "{" + "tuttext" + " : " + _tuttext.ToString() + "} ";
 			return ret;
 		}
 	}
 	public sealed class Levels2 : IGoogle2uDB
 	{
 		public enum rowIds {
-			level11, level12, level13, level14, level15, level16, level17, level18
+			level9, level10, level11, level12, level13, level14, level15, level16
 		};
 		public string [] rowNames = {
-			"level11", "level12", "level13", "level14", "level15", "level16", "level17", "level18"
+			"level9", "level10", "level11", "level12", "level13", "level14", "level15", "level16"
 		};
 		public System.Collections.Generic.List<Levels2Row> Rows = new System.Collections.Generic.List<Levels2Row>();
 
@@ -123,14 +132,14 @@ namespace Google2u
 
 		private Levels2()
 		{
-			Rows.Add( new Levels2Row("level11", "11", "helloworld", "0000000020004000000000060000000010000000000000003", "49"));
-			Rows.Add( new Levels2Row("level12", "12", "a", "0006000002000400000000000000000010000000300000000", "49"));
-			Rows.Add( new Levels2Row("level13", "13", "b", "0006001002000400000010000000000010000000300000100", "49"));
-			Rows.Add( new Levels2Row("level14", "14", "c", "0000000020004000000000060000000010000000000000003", "49"));
-			Rows.Add( new Levels2Row("level15", "15", "d", "0000000020004000000000060000000010000000000000003", "49"));
-			Rows.Add( new Levels2Row("level16", "16", "e", "0000000020004000000000060000000010000000000000003", "49"));
-			Rows.Add( new Levels2Row("level17", "17", "f", "0000000020004000000000060000000010000000000000003", "49"));
-			Rows.Add( new Levels2Row("level18", "18", "g", "0000000020004000000000060000000010000000000000003", "49"));
+			Rows.Add( new Levels2Row("level9", "9", "helloworld", "0000000020004000000000060000000010000000000000003", "49", "unwritten"));
+			Rows.Add( new Levels2Row("level10", "10", "a", "0006000002000400000000000000000010000000300000000", "49", "unwritten"));
+			Rows.Add( new Levels2Row("level11", "11", "b", "0006001002000400000010000000000010000000300000100", "49", "unwritten"));
+			Rows.Add( new Levels2Row("level12", "12", "c", "0000000020004000000000060000000010000000000000003", "49", "unwritten"));
+			Rows.Add( new Levels2Row("level13", "13", "d", "0000000020004000000000060000000010000000000000003", "49", "unwritten"));
+			Rows.Add( new Levels2Row("level14", "14", "e", "0000000020004000000000060000000010000000000000003", "49", "unwritten"));
+			Rows.Add( new Levels2Row("level15", "15", "f", "0000000020004000000000060000000010000000000000003", "49", "unwritten"));
+			Rows.Add( new Levels2Row("level16", "16", "g", "0000000020004000000000060000000010000000000000003", "49", "unwritten"));
 		}
 		public IGoogle2uRow GetGenRow(string in_RowString)
 		{

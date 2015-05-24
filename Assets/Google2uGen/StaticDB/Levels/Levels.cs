@@ -17,7 +17,8 @@ namespace Google2u
 		public string _name;
 		public string _leveldata;
 		public int _validate;
-		public LevelsRow(string __id, string __idint, string __name, string __leveldata, string __validate) 
+		public string _tuttext;
+		public LevelsRow(string __id, string __idint, string __name, string __leveldata, string __validate, string __tuttext) 
 		{
 			{
 			int res;
@@ -35,9 +36,10 @@ namespace Google2u
 				else
 					Debug.LogError("Failed To Convert _validate string: "+ __validate +" to int");
 			}
+			_tuttext = __tuttext.Trim();
 		}
 
-		public int Length { get { return 4; } }
+		public int Length { get { return 5; } }
 
 		public string this[int i]
 		{
@@ -64,6 +66,9 @@ namespace Google2u
 				case 3:
 					ret = _validate.ToString();
 					break;
+				case 4:
+					ret = _tuttext.ToString();
+					break;
 			}
 
 			return ret;
@@ -86,6 +91,9 @@ namespace Google2u
 				case "validate":
 					ret = _validate.ToString();
 					break;
+				case "tuttext":
+					ret = _tuttext.ToString();
+					break;
 			}
 
 			return ret;
@@ -97,6 +105,7 @@ namespace Google2u
 			ret += "{" + "name" + " : " + _name.ToString() + "} ";
 			ret += "{" + "leveldata" + " : " + _leveldata.ToString() + "} ";
 			ret += "{" + "validate" + " : " + _validate.ToString() + "} ";
+			ret += "{" + "tuttext" + " : " + _tuttext.ToString() + "} ";
 			return ret;
 		}
 	}
@@ -123,14 +132,14 @@ namespace Google2u
 
 		private Levels()
 		{
-			Rows.Add( new LevelsRow("level1", "1", "helloworld", "4444444400000440500044000004400020440000044444444", "49"));
-			Rows.Add( new LevelsRow("level2", "2", "a", "4444444000400000040000504020000400000040004444444", "49"));
-			Rows.Add( new LevelsRow("level3", "3", "b", "0006000050600000040004446666000400000040200004000", "49"));
-			Rows.Add( new LevelsRow("level4", "4", "c", "4444444403002440000044000104400010445001044444444", "49"));
-			Rows.Add( new LevelsRow("level5", "5", "d", "4400644403062440006044010004400300445010044400044", "49"));
-			Rows.Add( new LevelsRow("level6", "6", "e", "4444444400102440013344001004400100445010044444444", "49"));
-			Rows.Add( new LevelsRow("level7", "7", "f", "4444444400402440700044040404400070445040044444444", "49"));
-			Rows.Add( new LevelsRow("level8", "8", "g", "0000000000000000000000000000000000000000000000000", "49"));
+			Rows.Add( new LevelsRow("level1", "1", "helloworld", "4444444400000440500044000004400020440000044444444", "49", "Swipe the screen to move your character to the goal."));
+			Rows.Add( new LevelsRow("level2", "2", "a", "4444444000400000040000504020000400000040004444444", "49", "It is possible to move offscreen and appear at the other end."));
+			Rows.Add( new LevelsRow("level3", "3", "b", "0006000050600000040004446666000400000040200004000", "49", "Red Objects are dangerous."));
+			Rows.Add( new LevelsRow("level4", "4", "c", "4444444403002440000044000104400010445001044444444", "49", "Time your movement to get past enemies."));
+			Rows.Add( new LevelsRow("level5", "5", "d", "4400644403062440006044010004400300445010044400044", "49", "A little more complex now..."));
+			Rows.Add( new LevelsRow("level6", "6", "e", "4444444400102440013344001004400100445010044444444", "49", "Slip past the enemies by get the timing correct."));
+			Rows.Add( new LevelsRow("level7", "7", "f", "4444444400402440700044040404400070445040044444444", "49", "Red objects also have their own set of rules."));
+			Rows.Add( new LevelsRow("level8", "8", "g", "0000000000000000000000000000000000000000000000000", "49", "unwritten"));
 		}
 		public IGoogle2uRow GetGenRow(string in_RowString)
 		{

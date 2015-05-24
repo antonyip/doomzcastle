@@ -69,7 +69,7 @@ public class GameScript : MonoBehaviour {
 	public void PrepareTutorial()
 	{
 		TutorialPopUp.SetActive(true);
-		TutorialPopUp.transform.FindChild("TutorialText").GetComponent<Text>().text = "Test Tutorial";
+		TutorialPopUp.transform.FindChild("TutorialText").GetComponent<Text>().text = DataManager.instance.selectedLevel.tuttext;
 	}
 
 	// Use this for initialization

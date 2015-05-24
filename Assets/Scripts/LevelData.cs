@@ -8,6 +8,7 @@ public class LevelData
 	public string levelName;
 	public int level;
 	public string levelData;
+	public string tuttext;
 
 	// customization
 	public int customizedTile;
@@ -20,6 +21,7 @@ public class LevelData
 		levelName = "undefined";
 		level = -1;
 		levelData = "0000000020004000000000060000000010000000000000003";
+		tuttext = "undefined";
 		customizedTile = 0;
 		customizedBackground = 0;
 	}
@@ -33,14 +35,16 @@ public class LevelData
 			level = ldata._idint;
 			levelData = ldata._leveldata;
 			levelName = ldata._name;
+			tuttext = ldata._tuttext;
 			//Levels.Instance.GetGenRow("level"+level.ToString());
 		}
 		else
 		{
 			Levels2Row ldata2 = Levels2.Instance.GetRow("level"+level.ToString());
-			level = ldata2._idInt;
+			level = ldata2._idint;
 			levelData = ldata2._leveldata;
 			levelName = ldata2._name;
+			tuttext = ldata2._tuttext;
 		}
 	}
 
