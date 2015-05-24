@@ -15,6 +15,7 @@ public class RawControlScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		/*
 		//default to android / any other platform
 		#if UNITY_ANDROID
 		const float SOME_TOLERANCE = 5;
@@ -65,5 +66,7 @@ public class RawControlScript : MonoBehaviour {
 				dragVecs.RemoveAt(i);
 			}
 		}
+		*/
 	}
+
 }
