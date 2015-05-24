@@ -5,8 +5,10 @@ using System.Collections;
 public class LevelSelectButtonScript : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start ()
+	{
+		Text s = transform.GetChild(0).GetComponent<Text>();
+		s.text = gameObject.name.Substring("LevelSelectButton ".Length);
 	}
 	
 	// Update is called once per frame

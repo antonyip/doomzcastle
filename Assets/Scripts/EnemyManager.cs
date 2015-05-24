@@ -68,9 +68,12 @@ public class EnemyManager : MonoBehaviour {
 	
 	public void UpdateEnemies()
 	{
-		foreach (Enemy e in AllEnemies)
+		AllEnemies.Sort(Enemy.pCompare);
+
+		for (int i = 0; i < AllEnemies.Count; i++)
 		{
-			e.UpdateAI();
+			//Debug.Log(AllEnemies[i].eName);
+			AllEnemies[i].UpdateAI();
 		}
 	}
 }

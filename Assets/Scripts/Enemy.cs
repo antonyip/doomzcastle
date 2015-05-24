@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
 	public CollisionType eColType;
 	public int eRow;
 	public int eCol;
+	public int ePriority;
 
 	// Use this for initialization
 	void Start ()
@@ -41,6 +42,15 @@ public class Enemy : MonoBehaviour
 	void Update ()
 	{
 	
+	}
+
+	public static int pCompare(Enemy e1, Enemy e2)
+	{
+		if (e1.ePriority < e2.ePriority)
+			return -1;
+		if (e1.ePriority > e2.ePriority)
+			return 1;
+		return 0;
 	}
 
 	public static EnemyType charToEnemyTypeConverter(char c)

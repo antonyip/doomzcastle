@@ -17,16 +17,41 @@ public class EnemyLeftRight : Enemy
 	{
 		if (jumped)
 		{
+
+			int prev = eCol;
+
 			eCol += 1;
 			if (eCol > GameScript.maxCol -1)
 				eCol = 0;
+
+			GameScript.instance.blockedFloors[prev+eRow*GameScript.maxRow] = 0;
+
+			if (GameScript.instance.blockedFloors[eCol+eRow*GameScript.maxRow] != 0)
+			{
+				eCol = prev;
+			}
+
+			GameScript.instance.blockedFloors[eCol+eRow*GameScript.maxRow] = eID;
+
 			jumped = false;
 		}
 		else
 		{
+			int prev = eCol;
+
 			eCol -= 1;
 			if (eCol < 0)
 				eCol = GameScript.maxCol-1;
+
+			GameScript.instance.blockedFloors[prev+eRow*GameScript.maxRow] = 0;
+
+			if (GameScript.instance.blockedFloors[eCol+eRow*GameScript.maxRow] != 0)
+			{
+				eCol = prev;
+			}
+
+			GameScript.instance.blockedFloors[eCol+eRow*GameScript.maxRow] = eID;
+
 			jumped = true;
 		}
 	}

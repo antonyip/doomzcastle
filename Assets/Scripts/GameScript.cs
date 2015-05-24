@@ -20,8 +20,8 @@ public class GameScript : MonoBehaviour {
 	public Image Background;
 
 	// Floor Details
-	public List<GameObject> allFloors = new List<GameObject>();
-	public int[] blockedFloors;
+	public List<GameObject> allFloors = new List<GameObject>(); // Holder for Visuals
+	public int[] blockedFloors; // use this for figuring out blocking
 
 	// Debug
 	public bool BEATMODE;
@@ -191,8 +191,8 @@ public class GameScript : MonoBehaviour {
 
 		foreach (Enemy go in EnemyManager.instance.AllEnemies)
 		{
-			if (go.eColType == CollisionType.Block)
-				blockedFloors[go.eCol+go.eRow*maxRow] = 1;
+			//if (go.eColType == CollisionType.Block)
+			blockedFloors[go.eCol+go.eRow*maxRow] = go.eID;
 		}
 	}
 
@@ -208,6 +208,8 @@ public class GameScript : MonoBehaviour {
 			BeatTimer -= Time.deltaTime;
 			LateBeatTimer += Time.deltaTime;
 
+			HandleKeyboardInput();
+
 			if (BeatTimer < LateLimit/2)
 			{
 				ShowHitBeat();
@@ -220,6 +222,8 @@ public class GameScript : MonoBehaviour {
 				UpdateEnemyPositionsInGrid();
 				EnemyManager.instance.UpdateEnemies();
 				HandlePlayerMovement();
+				Player.transform.DOMove(allFloors[pCol+pRow*maxRow].transform.position,DefaultBeatTimer/2);
+				CheckForCollisions ();
 			}
 			
 			if (LateBeatTimer > LateLimit/2)
@@ -228,40 +232,8 @@ public class GameScript : MonoBehaviour {
 			}
 
 			// handle input
-			HandleKeyboardInput();
 
-			// update player pos if game is still in progres
-			//Player.transform.position = allFloors[pCol+pRow*maxRow].transform.position;
-			Player.transform.DOMove(allFloors[pCol+pRow*maxRow].transform.position,DefaultBeatTimer/2);
-			//Player.transform.localPosition = startPoint + new Vector3(pCol*offsetGrid,pRow*offsetGrid,0);
 
-			// check for collisions
-			foreach (Enemy go in EnemyManager.instance.AllEnemies)
-			{
-				// update positions
-				//go.transform.position = allFloors[go.eCol+go.eRow*maxRow].transform.position;
-				go.transform.DOMove(allFloors[go.eCol+go.eRow*maxRow].transform.position,DefaultBeatTimer/2);
-				//go.transform.localPosition = GameScript.startPoint + new Vector3(go.eCol*GameScript.offsetGrid,go.eRow*GameScript.offsetGrid,0);
-
-				// check for game over
-				if (go.eCol == pCol && go.eRow == pRow)
-				{
-					if (go.eColType == CollisionType.Death)
-					{
-						gameInProgress = false;
-						DefeatPopUp.SetActive(true);
-						Debug.Log("Game Over");
-
-					}
-
-					if (go.eColType == CollisionType.Win)
-					{
-						gameInProgress = false;
-						VictoryPopUp.SetActive(true);
-						Debug.Log("Victory!");
-					}
-				}
-			}
 
 		}
 		#endregion
@@ -284,6 +256,30 @@ public class GameScript : MonoBehaviour {
 		//BeatIndicator.SetActive(false);	
 	}
 
+	void CheckForCollisions ()
+	{
+		foreach (Enemy go in EnemyManager.instance.AllEnemies) {
+			// update positions
+			//go.transform.position = allFloors[go.eCol+go.eRow*maxRow].transform.position;
+			go.transform.DOMove (allFloors [go.eCol + go.eRow * maxRow].transform.position, DefaultBeatTimer / 2);
+			//go.transform.localPosition = GameScript.startPoint + new Vector3(go.eCol*GameScript.offsetGrid,go.eRow*GameScript.offsetGrid,0);
+			// check for game over
+			if (go.eCol == pCol && go.eRow == pRow) {
+				if (go.eColType == CollisionType.Death) {
+					gameInProgress = false;
+					DefeatPopUp.SetActive (true);
+					Debug.Log ("Game Over");
+					return;
+				}
+				if (go.eColType == CollisionType.Win) {
+					gameInProgress = false;
+					VictoryPopUp.SetActive (true);
+					Debug.Log ("Victory!");
+				}
+			}
+		}
+	}
+
 	void HandlePlayerMovement()
 	{
 		int temp;
@@ -296,7 +292,7 @@ public class GameScript : MonoBehaviour {
 				temp = 0;
 			}
 
-			if (blockedFloors[(temp)*maxRow + pCol] != 0)
+			if ((EnemyType)blockedFloors[(temp)*maxRow + pCol] == EnemyType.Wall)
 				return;
 
 			pRow = temp;
@@ -315,7 +311,7 @@ public class GameScript : MonoBehaviour {
 				temp = maxRow-1;
 			}
 
-			if (blockedFloors[(temp)*maxRow + pCol] != 0)
+			if ((EnemyType)blockedFloors[(temp)*maxRow + pCol] == EnemyType.Wall)
 				return;
 
 			pRow = temp;
@@ -334,7 +330,7 @@ public class GameScript : MonoBehaviour {
 				temp = maxCol-1;
 			}
 
-			if (blockedFloors[pRow*maxRow + temp] != 0)
+			if ((EnemyType)blockedFloors[(pRow)*maxRow + temp] == EnemyType.Wall)
 				return;
 
 			pCol = temp;
@@ -353,7 +349,7 @@ public class GameScript : MonoBehaviour {
 				temp= 0;
 			}
 
-			if (blockedFloors[pRow*maxRow + temp] != 0)
+			if ((EnemyType)blockedFloors[(pRow)*maxRow + temp] == EnemyType.Wall)
 				return;
 
 			pCol = temp;
