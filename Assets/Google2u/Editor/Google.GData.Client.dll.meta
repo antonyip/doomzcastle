@@ -1,14 +1,17 @@
 fileFormatVersion: 2
-guid: fdb8ba6dba551ff44ae0642d093713d3
-PluginImporter:
+guid: c17dd59a762058a43bb1e09661f67ddb
+labels:
+- GoogleFu
+- Google
+- Database
+- Data
+- Spreadsheet
+- XML
+- CSV
+- JSON
+- NGUI
+MonoAssemblyImporter:
   serializedVersion: 1
   iconMap: {}
   executionOrder: {}
-  isPreloaded: 0
-  platformData:
-    Any:
-      enabled: 1
-      settings: {}
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 

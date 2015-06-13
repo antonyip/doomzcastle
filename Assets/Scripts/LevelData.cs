@@ -29,23 +29,14 @@ public class LevelData
 	// used for internal levels
 	public void LoadLevel(int level)
 	{
-		if (level <= 8)
-		{
-			LevelsRow ldata = Levels.Instance.GetRow("level"+level.ToString());
-			level = ldata._idint;
-			levelData = ldata._leveldata;
-			levelName = ldata._name;
-			tuttext = ldata._tuttext;
-			//Levels.Instance.GetGenRow("level"+level.ToString());
-		}
-		else
-		{
-			Levels2Row ldata2 = Levels2.Instance.GetRow("level"+level.ToString());
-			level = ldata2._idint;
-			levelData = ldata2._leveldata;
-			levelName = ldata2._name;
-			tuttext = ldata2._tuttext;
-		}
+
+		LevelsRow ldata = Levels.Instance.GetRow("level"+level.ToString());
+		level = ldata._idint;
+		levelData = ldata._leveldata;
+		levelName = ldata._name;
+		tuttext = ldata._tuttext;
+		//Levels.Instance.GetGenRow("level"+level.ToString());
+
 	}
 
 	// used for external levels
